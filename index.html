@@ -3,6 +3,8 @@
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="js/main.js"></script>
+        <link rel="stylesheet" href="css/main.css">
+        <title>オカシラ討伐カウンター</title>
     </head>
 
     <body onload="init()">
@@ -10,24 +12,12 @@
             <div>
                 オカシラ討伐数:<span id="subjugation_sum"></span>
             </div>
-            <div id="Cohozuna">
-                ヨコヅナ: <span id="Cohozuna_cnt"></span>　
-                <input type="button" value="ー" onclick="setSubjugationSum('Cohozuna',getSubjugationSum('Cohozuna')-1)">
-                <input type="button" value="＋"
-                    onclick="setSubjugationSum('Cohozuna',getSubjugationSum('Cohozuna')+1)"><br>
+            <div id="BossSalmonids_area">
+
             </div>
-            <div id="Horrorboros">
-                　タツ　: <span id="Horrorboros_cnt"></span>　
-                <input type="button" value="ー"
-                    onclick="setSubjugationSum('Horrorboros',getSubjugationSum('Horrorboros')-1)">
-                <input type="button" value="＋"
-                    onclick="setSubjugationSum('Horrorboros',getSubjugationSum('Horrorboros')+1)"><br>
-            </div>
-
-
-
             <textarea name="log" id="log" cols="50" rows="10"></textarea>
         </div>
+        <input type="button" value="delete" onclick="deleteLocalStorage()" style="display: none;">
     </body>
 
     </html>
