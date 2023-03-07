@@ -30,6 +30,9 @@ function init() {
   loadLocalStorage()
   makeBossSalmonidsTable(BossSalmonids)
   setSubjugation()
+  setCheckBox()
+  changeBossSalmonidsVisibility(data.showBoss)
+  addEvent()
 }
 
 function setSubjugationSum(id, n) {
@@ -74,22 +77,20 @@ function loadLocalStorage() {
   if (localStorage.getItem(LOCAL_STORAGE_KEY)) {
     var obj = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
     data = obj
-
-    // BossSalmonids.forEach(key => {
-    //   if (!data[key]) {
-    //     data[key] = { count: 0 }
-    //   }
-    // })
-    // KingSalmonid.forEach(key => {
-    //   if (!data[key]) {
-    //     data[key] = { count: 0 }
-    //   }
-    // })
-
     addLog("load local storage")
   } else {
     addLog("no data")
   }
+  BossSalmonids.forEach(key => {
+    if (!data[key]) {
+      data[key] = { count: 0 }
+    }
+  })
+  KingSalmonid.forEach(key => {
+    if (!data[key]) {
+      data[key] = { count: 0 }
+    }
+  })
 
 }
 
@@ -123,7 +124,6 @@ function getTimeStamp() {
 }
 
 function makeBossSalmonidsTable() {
-
   let tablestr = '<table class="kingSalmonid-name"><tr><td>名称</td><td>討伐数</td><td></td></tr>';
   Object.keys(SalmonidsData).forEach(key => {
     tablestr += `<tr id="${key}">`
@@ -134,4 +134,31 @@ function makeBossSalmonidsTable() {
   })
   tablestr += '</table>'
   $('#BossSalmonids_area').append(tablestr)
+
+}
+
+function changeBossSalmonidsVisibility(flag) {
+  Object.keys(BossSalmonids).forEach(key => {
+    if (flag) {
+      $(`#${BossSalmonids[key]}`).css('display', '')
+      data.showBoss = true
+    } else {
+      $(`#${BossSalmonids[key]}`).css('display', 'none')
+      data.showBoss = false
+    }
+  })
+  saveLocalStorage()
+}
+
+function addEvent() {
+  $('#showBoss').on('click', function () {
+    changeBossSalmonidsVisibility($("#showBoss").prop("checked"))
+  })
+}
+function setCheckBox() {
+  if (data.showBoss) {
+    $('#showBoss').prop('checked', true);
+  } else {
+    $('#showBoss').prop('checked', false);
+  }
 }
